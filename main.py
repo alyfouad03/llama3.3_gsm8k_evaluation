@@ -54,13 +54,15 @@ def evaluate_llama_accuracy():
         correct_answer = extract_answer(instance["answer"])
 
         if not correct_answer:
-            print(f"Skipping question {i}, answer doesn't follow template.")
+            print(f"Skipping question {counter}, answer doesn't follow template.")
+            print("=" * 50)
             continue
 
         llm_result = llama(question)
 
         if not llm_result:
-            print(f"Skipping question {i}, no response from LLAMA.")
+            print(f"Skipping question {counter}, no response from LLAMA.")
+            print("=" * 50)
             continue
         llm_result_stripped = extract_answer(llm_result)
 
@@ -70,7 +72,8 @@ def evaluate_llama_accuracy():
             if llm_result_stripped == correct_answer:
                 correct_predictions += 1
         except Exception:
-            print(f"Skipping question {i}, couldn't extract numerical result from answer")
+            print(f"Skipping question {counter}, couldn't extract numerical result from answer")
+            print("=" * 50)
             continue
 
         print(f"Question {counter}/{sample_size}")
